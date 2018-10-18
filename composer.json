@@ -1,6 +1,5 @@
 {
   "name": "agilekeys/code-standards",
-  "type": "phpcodesniffer-standard",
   "description": "The coding standard of the PHP projects, includes PHPMD and PHPCS rules.",
   "keywords": [
     "coding",
@@ -22,7 +21,9 @@
   "require": {
     "php": "^7.1",
     "phpmd/phpmd": "^2.6.0",
-    "squizlabs/php_codesniffer": "^3.3.2"
+    "squizlabs/php_codesniffer": "^3.3.2",
+    "slevomat/coding-standard": "^4.8.0"
+
   },
   "suggest": {
     "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
