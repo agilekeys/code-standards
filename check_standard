@@ -37,6 +37,20 @@ if ${PHPCPD_ENABLED}; then
     fi
 fi
 
+# Run phpmd
+if ${PHPMD_ENABLED}; then
+    resolve_executable phpmd
+
+    if [ ${?} -eq 0 ]; then
+        echo "Running php mess detector..."
+        if [ -f phpmd.xml ]; then
+            results ${executable} ${checks// /,} text phpmd.xml
+        else
+            results ${executable} ${checks// /,} text ${PHPMD_RULESETS}
+        fi
+    fi
+fi
+
 # Run phpcs
 if ${PHPCS_ENABLED}; then
     resolve_executable phpcs
@@ -52,19 +66,6 @@ if ${PHPCS_ENABLED}; then
     fi
 fi
 
-# Run phpmd
-if ${PHPMD_ENABLED}; then
-    resolve_executable phpmd
-
-    if [ ${?} -eq 0 ]; then
-        echo "Running php mess detector..."
-        if [ -f phpmd.xml ]; then
-            results ${executable} ${checks// /,} text phpmd.xml
-        else
-            results ${executable} ${checks// /,} text ${PHPMD_RULESETS}
-        fi
-    fi
-fi
 
 if [ ${exitcode} -eq 0 ]; then
     echo -e "\033[1;92m"
