@@ -16,6 +16,19 @@ else
     exit 1
 fi
 
+
+########## PARAM DETECTOR ##########
+if [ ! -z "$1" ]; then
+    PHPCPD_ENABLED=false
+    PHPMD_ENABLED=false
+    PHPCS_ENABLED=false
+
+    PARAM="$1"
+    PARAM=$( echo "$PARAM"|tr '/a-z/' '/A-Z/')
+    eval "$PARAM"_ENABLED=true
+fi
+
+
 resolve_paths ${PATHS}
 
 if [ ${#checks[@]} -lt 1 ]; then
