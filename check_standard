@@ -66,10 +66,10 @@ fi
 
 if [ ${exitcode} -eq 0 ]; then
     echo -e "\033[1;92m"
-    echo "It all looks fine to me you fucking champion!"
+    echo "It all looks good!"
 else
     echo -e "\033[1;91m"
-    echo -e "Oh you screwed up somewhere, go fix your errors"
+    echo -e "Please fix errors!"
 fi
 
 printf "\033[m\n"
