@@ -1,7 +1,6 @@
 #!/bin/bash
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-source "${DIR}/standard.config"
 source "${DIR}/standard.lib"
 
 # Assume all test passed
@@ -12,6 +11,9 @@ if [ -f "standard.config" ]; then
     set -a
     source standard.config
     set +a
+else
+    echo "Could not find 'standard.config' file.", please make a 'standard.config' by following document.
+    exit 1
 fi
 
 resolve_paths ${PATHS}

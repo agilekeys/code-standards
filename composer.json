@@ -33,7 +33,6 @@
   },
   "bin": [
     "check_standard",
-    "standard.config",
     "standard.lib"
   ],
   "minimum-stability": "stable",
