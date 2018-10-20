@@ -1,0 +1,78 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+source "${DIR}/standard.config"
+source "${DIR}/standard.lib"
+
+# Assume all test passed
+exitcode=0
+
+# Import local standard config file
+if [ -f "standard.config" ]; then
+    set -a
+    source standard.config
+    set +a
+fi
+
+resolve_paths ${PATHS}
+
+if [ ${#checks[@]} -lt 1 ]; then
+    echo "Paths specfiied in configuration file are invalid or could not be found"
+    echo "PATHS=<path>,<path>,..."
+    exit 1
+fi
+
+# Combine directories into a single variable
+checks=${checks[@]}
+
+# Run phpcpd
+if ${PHPCPD_ENABLED}; then
+    resolve_executable phpcpd
+
+    if [ ${?} -eq 0 ]; then
+        echo "Running php copy/paste detector..."
+        results ${executable} --ansi --min-lines=${PHPCPD_MIN_LINES} --min-tokens=${PHPCPD_MIN_TOKENS} ${checks}
+    fi
+fi
+
+# Run phpcs
+if ${PHPCS_ENABLED}; then
+    resolve_executable phpcs
+
+    if [ ${?} -eq 0 ]; then
+        show_sniff_arg=$([ "$PHPCS_SHOW_SNIFF_NAME" = true ] && echo '-s')
+        echo "Running php code sniffer..."
+        if [ -f phpcs.xml ]; then
+            results ${executable} --colors ${checks} ${show_sniff_arg}
+        else
+            results ${executable} --standard=${PHPCS_STANDARDS} --colors --report=full ${checks} ${show_sniff_arg}
+        fi
+    fi
+fi
+
+# Run phpmd
+if ${PHPMD_ENABLED}; then
+    resolve_executable phpmd
+
+    if [ ${?} -eq 0 ]; then
+        echo "Running php mess detector..."
+        if [ -f phpmd.xml ]; then
+            results ${executable} ${checks// /,} text phpmd.xml
+        else
+            results ${executable} ${checks// /,} text ${PHPMD_RULESETS}
+        fi
+    fi
+fi
+
+if [ ${exitcode} -eq 0 ]; then
+    echo -e "\033[1;92m"
+    echo "It all looks fine to me you fucking champion!"
+else
+    echo -e "\033[1;91m"
+    echo -e "Oh you screwed up somewhere, go fix your errors"
+fi
+
+printf "\033[m\n"
+
+# If there was an error exit with error code
+exit ${exitcode}

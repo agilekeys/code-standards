@@ -31,6 +31,11 @@
     "squizlabs/php_codesniffer": "^3.0",
     "loyaltycorp/standards": "dev-master"
   },
+  "bin": [
+    "check_standard",
+    "standard.config",
+    "standard.lib"
+  ],
   "minimum-stability": "stable",
   "prefer-stable": true,
   "config": {
