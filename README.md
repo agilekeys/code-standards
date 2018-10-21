@@ -10,3 +10,8 @@ vendor/bin/phpcs --standard=phpcs.xml .test
 vendor/bin/phpmd src/PHPMassDetector text phpmd.xml
 ```
 
+TODO
+ - PHPSTAN
+   - phpstan in cli
+   - config file dist
+   - config file test
