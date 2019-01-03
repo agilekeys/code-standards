@@ -9,3 +9,12 @@ services:
         working_dir: "/var/www"
         volumes:
             - .:/var/www
+    composer:
+        image: dockercraft/composer
+        container_name: composer
+        entrypoint:
+            - composer
+        command: "-v"
+        working_dir: "/var/www"
+        volumes:
+            - .:/var/www
