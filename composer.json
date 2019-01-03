@@ -21,11 +21,11 @@
   "require": {
     "php": "^7.1",
     "phpmd/phpmd": "^2.6.0",
-    "squizlabs/php_codesniffer": "^3.3.2",
-    "slevomat/coding-standard": "^4.8.0",
+    "phpstan/phpstan": "^0.10.3",
+    "phpunit/phpunit": "^7.5",
     "sebastian/phpcpd": "^4.1.0",
-    "phpstan/phpstan": "^0.10.3"
-
+    "slevomat/coding-standard": "^4.8.0",
+    "squizlabs/php_codesniffer": "^3.3.2"
   },
   "suggest": {
     "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
