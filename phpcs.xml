@@ -172,6 +172,8 @@
         <exclude name="Squiz.Commenting.FunctionComment.ScalarTypeHintMissing"/>
         <!-- Doesn't work with self as typehint -->
         <exclude name="Squiz.Commenting.FunctionComment.TypeHintMissing"/>
+
+        <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
     </rule>
     <!-- Forbid global functions -->
     <rule ref="Squiz.Functions.GlobalFunction"/>
