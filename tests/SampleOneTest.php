@@ -19,4 +19,16 @@ class SampleOneTest extends TestCase
         static::assertEquals('name', $sample->getName());
         static::assertEquals(123, $sample->getNumber());
     }
+
+    public function test_set_get_name()
+    {
+    	$sample = new SampleOne('name', 123);
+    	$sample->setName('eman');
+    	$sample->setNumber(321);
+    	static::assertNotEquals('name', $sample->getName());
+        static::assertNotEquals(123, $sample->getNumber());	
+
+        static::assertEquals('eman', $sample->getName());
+        static::assertEquals(321, $sample->getNumber());	
+    }
 }

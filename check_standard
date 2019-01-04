@@ -144,6 +144,8 @@ if ${PHPUNIT_ENABLED}; then
                         exitcode=1
                         echo -e "\n${results}\n"
                         echo -e "Minimum code coverage level not met, expected ${PHPUNIT_COVERAGE_MINIMUM_LEVEL}% got ${phpunit_line_coverage}%"
+                    else
+                        echo -e "\n${results}\n"
                     fi
                 fi
             fi
